@@ -28,8 +28,7 @@ func NewAriaDownloader(uri string) *AriaDownloader {
 
 func (a *AriaDownloader) DownloadFile(url string, authToken *string, outDir string, outFilename string) error {
 	// TODO: parameterize maxConnections
-	fmt.Printf("downloading %s to %s", url, outFilename)
-	status, err := a.c.Download(arigo.URIs("url"), &arigo.Options{Dir: outDir, Out: outFilename, MaxConnectionPerServer: 8})
+	status, err := a.c.Download(arigo.URIs(url), &arigo.Options{Dir: outDir, Out: outFilename, MaxConnectionPerServer: 8})
 	if err != nil {
 		return err
 	}

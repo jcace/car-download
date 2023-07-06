@@ -22,7 +22,7 @@ func main() {
 			&cli.StringFlag{
 				Name:    "aria-uri",
 				Aliases: []string{"a"},
-				Value:   "http://localhost:6800/jsonrpc",
+				Value:   "ws://localhost:6800/jsonrpc",
 				Usage:   "aria2c RPC URI",
 			},
 			&cli.StringFlag{

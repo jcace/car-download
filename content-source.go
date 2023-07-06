@@ -48,11 +48,10 @@ func (d *DDMContentSource) GetContentList() ([]Content, error) {
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
+	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		resp.Body.Close()
 		return nil, fmt.Errorf("error in http call %d : %s", resp.StatusCode, body)
 	}
-	defer req.Body.Close()
 
 	if err != nil {
 		return nil, fmt.Errorf("could not read response body %v", err)
@@ -67,6 +66,9 @@ func (d *DDMContentSource) GetContentList() ([]Content, error) {
 	var contents []Content
 
 	for _, availableContent := range availableContents {
+		if availableContent.ContentLocation == "" {
+			continue
+		}
 		contents = append(contents, Content{
 			PieceCID:        availableContent.PieceCID,
 			ContentLocation: availableContent.ContentLocation,

@@ -14,11 +14,11 @@ func RunDaemon(d Downloader, c ContentSource, cfg Config) {
 
 		// For each content, download it
 		for _, content := range contentList {
-			fmt.Printf("downloading %s to %s\n", content.PieceCID, content.ContentLocation)
-			err := d.DownloadFile(content.PieceCID, nil, cfg.OutDir, content.PieceCID+".car")
-			if err != nil {
-				fmt.Printf("error downloading %s: %s\n", content.PieceCID, err)
-			}
+	fmt.Printf("downloading %s to %s\n", content.ContentLocation, content.PieceCID)
+	err = d.DownloadFile(content.ContentLocation, nil, cfg.OutDir, content.PieceCID+".car")
+	if err != nil {
+		fmt.Printf("error downloading %s: %s\n", content.PieceCID, err)
+	}
 		}
 	}
 }
