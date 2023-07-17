@@ -37,6 +37,13 @@ func main() {
 				Required: true,
 				Usage:    "DDM self-service token",
 			},
+			&cli.UintFlag{
+				Name:        "interval",
+				Aliases:     []string{"i"},
+				Value:       10,
+				DefaultText: "10",
+				Usage:       "interval (in minutes) to check for new content to download",
+			},
 		},
 		Action: func(c *cli.Context) error {
 			fmt.Println("starting downloader")

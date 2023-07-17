@@ -7,6 +7,7 @@ type Config struct {
 	AriaUri  string
 	DDMUri   string
 	DDMToken string
+	Interval uint
 }
 
 func CreateConfig(cctx *cli.Context) (Config, error) {
@@ -15,6 +16,7 @@ func CreateConfig(cctx *cli.Context) (Config, error) {
 		AriaUri:  cctx.String("aria-uri"),
 		DDMUri:   cctx.String("ddm-api"),
 		DDMToken: cctx.String("ddm-token"),
+		Interval: cctx.Uint("interval"),
 	}
 
 	return config, nil

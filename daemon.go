@@ -6,8 +6,6 @@ import (
 	"time"
 )
 
-const CONTENT_GET_INTERVAL = 10 * time.Minute
-
 func RunDaemon(d Downloader, c ContentSource, cfg Config) {
 	for {
 		// Get the list of content available
@@ -31,9 +29,9 @@ func RunDaemon(d Downloader, c ContentSource, cfg Config) {
 			}
 
 		}
-		fmt.Printf("completed content download. waiting %d minutes before check for new content", CONTENT_GET_INTERVAL/time.Minute)
+		fmt.Printf("completed content download. waiting %d minutes before check for new content", cfg.Interval)
 
 		// Wait between runs
-		time.Sleep(CONTENT_GET_INTERVAL)
+		time.Sleep(time.Duration(cfg.Interval) * time.Minute)
 	}
 }
