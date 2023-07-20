@@ -26,12 +26,11 @@ func RunDaemon(d Downloader, c ContentSource, cfg Config) {
 			err = d.DownloadFile(content.ContentLocation, nil, cfg.OutDir, content.PieceCID+".car")
 			if err != nil {
 				fmt.Printf("error downloading %s: %s\n", content.PieceCID, err)
+				continue
 			}
-
+			// Wait between runs
+			time.Sleep(time.Duration(cfg.Interval) * time.Minute)
 		}
-		fmt.Printf("completed content download. waiting %d minutes before check for new content \n", cfg.Interval)
-
-		// Wait between runs
-		time.Sleep(time.Duration(cfg.Interval) * time.Minute)
+		fmt.Printf("completed content download for content list. Re-checking... \n")
 	}
 }
