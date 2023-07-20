@@ -14,7 +14,7 @@ func RunDaemon(d Downloader, c ContentSource, cfg Config) {
 			fmt.Println(err)
 		}
 
-		fmt.Printf("got a list of %d contents to download", len(contentList))
+		fmt.Printf("got a list of %d contents to download\n", len(contentList))
 
 		// For each content, download it
 		for _, content := range contentList {
@@ -29,7 +29,7 @@ func RunDaemon(d Downloader, c ContentSource, cfg Config) {
 			}
 
 		}
-		fmt.Printf("completed content download. waiting %d minutes before check for new content", cfg.Interval)
+		fmt.Printf("completed content download. waiting %d minutes before check for new content \n", cfg.Interval)
 
 		// Wait between runs
 		time.Sleep(time.Duration(cfg.Interval) * time.Minute)

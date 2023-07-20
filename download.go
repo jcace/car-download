@@ -28,12 +28,13 @@ func NewAriaDownloader(uri string) *AriaDownloader {
 
 func (a *AriaDownloader) DownloadFile(url string, authToken *string, outDir string, outFilename string) error {
 	// TODO: parameterize maxConnections
-	status, err := a.c.Download(arigo.URIs(url), &arigo.Options{Dir: outDir, Out: outFilename, MaxConnectionPerServer: 8, AutoFileRenaming: false, AllowOverwrite: false, ConditionalGet: true})
+	// status, err := a.c.Download(arigo.URIs(url), &arigo.Options{Dir: outDir, Out: outFilename, MaxConnectionPerServer: 8, AutoFileRenaming: false, AllowOverwrite: false, ConditionalGet: true})
+	gid, err := a.c.AddURI([]string{url}, &arigo.Options{Dir: outDir, Out: outFilename, MaxConnectionPerServer: 8, AutoFileRenaming: false, AllowOverwrite: false, ConditionalGet: true})
 	if err != nil {
 		return err
 	}
 
 	// download complete
-	fmt.Printf("download complete! %d bytes/s\n", status.DownloadSpeed)
+	fmt.Printf("download added! id: %v \n", gid)
 	return nil
 }
